@@ -1,3 +1,4 @@
+import 'package:all_flutter_resource/controller_binder/controller_binder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,8 +9,10 @@ class ResourceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      home: HomeScreen(),
+    return  GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialBinding: BinderController(),
+      home: const HomeScreen(),
     );
   }
 }
