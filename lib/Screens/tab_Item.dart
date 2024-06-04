@@ -16,6 +16,7 @@ class TabItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           count > 0
+
               ? Container(
                   margin: const EdgeInsetsDirectional.only(start: 5),
                   padding: const EdgeInsets.all(3),
