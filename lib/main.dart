@@ -139,183 +139,183 @@
 //     );
 //   }
 // }
-import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Jun 2024'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.filter_alt),
-              onPressed: () {
-                // Add filter functionality here
-              },
-            ),
-          ],
-        ),
-        body: ExpenseChart(),
-      ),
-    );
-  }
-}
-
-class ExpenseChart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircularChart(
-                title: 'Income',
-                percentage: 38,
-                amount: 588,
-                color: Colors.blue,
-              ),
-              CircularChart(
-                title: 'Expenses',
-                percentage: 50,
-                amount: 55,
-                color: Colors.red,
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          Text('Total \$533.00', style: TextStyle(fontSize: 18)),
-          SizedBox(height: 20),
-          Expanded(
-            child: ListView(
-              children: [
-                CheckboxListTile(
-                  title: Text('All'),
-                  value: true,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Text('Food'),
-                  value: false,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Text('Social Life'),
-                  value: false,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Text('Pets'),
-                  value: false,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Transport'),
-                      Text('\$55.00'),
-                    ],
-                  ),
-                  value: true,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Text('Culture'),
-                  value: false,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Text('Household'),
-                  value: false,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Text('Apparel'),
-                  value: false,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Text('Beauty'),
-                  value: false,
-                  onChanged: (bool? value) {},
-                ),
-                CheckboxListTile(
-                  title: Text('Health'),
-                  value: false,
-                  onChanged: (bool? value) {},
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CircularChart extends StatelessWidget {
-  final String title;
-  final int percentage;
-  final double amount;
-  final Color color;
-
-  CircularChart({
-    required this.title,
-    required this.percentage,
-    required this.amount,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          height: 150,
-          width: 150,
-          child: SfCircularChart(
-            series: <CircularSeries>[
-              DoughnutSeries<ChartData, String>(
-                dataSource: [
-                  ChartData('Used', percentage, color),
-                  ChartData('Remaining', 100 - percentage, Colors.grey[300]!),
-                ],
-                pointColorMapper: (ChartData data, _) => data.color,
-                xValueMapper: (ChartData data, _) => data.x,
-                yValueMapper: (ChartData data, _) => data.y,
-                innerRadius: '75%',
-              ),
-            ],
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('$percentage%', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            Text('\$$amount', style: TextStyle(fontSize: 16)),
-            Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class ChartData {
-  ChartData(this.x, this.y, this.color);
-  final String x;
-  final int y;
-  final Color color;
-}
+// import 'package:flutter/material.dart';
+// import 'package:syncfusion_flutter_charts/charts.dart';
+//
+// void main() {
+//   runApp(MyApp());
+// }
+//
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Jun 2024'),
+//           actions: [
+//             IconButton(
+//               icon: Icon(Icons.filter_alt),
+//               onPressed: () {
+//                 // Add filter functionality here
+//               },
+//             ),
+//           ],
+//         ),
+//         body: ExpenseChart(),
+//       ),
+//     );
+//   }
+// }
+//
+// class ExpenseChart extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(8.0),
+//       child: Column(
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//             children: [
+//               CircularChart(
+//                 title: 'Income',
+//                 percentage: 38,
+//                 amount: 588,
+//                 color: Colors.blue,
+//               ),
+//               CircularChart(
+//                 title: 'Expenses',
+//                 percentage: 50,
+//                 amount: 55,
+//                 color: Colors.red,
+//               ),
+//             ],
+//           ),
+//           SizedBox(height: 20),
+//           Text('Total \$533.00', style: TextStyle(fontSize: 18)),
+//           SizedBox(height: 20),
+//           Expanded(
+//             child: ListView(
+//               children: [
+//                 CheckboxListTile(
+//                   title: Text('All'),
+//                   value: true,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Text('Food'),
+//                   value: false,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Text('Social Life'),
+//                   value: false,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Text('Pets'),
+//                   value: false,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Text('Transport'),
+//                       Text('\$55.00'),
+//                     ],
+//                   ),
+//                   value: true,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Text('Culture'),
+//                   value: false,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Text('Household'),
+//                   value: false,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Text('Apparel'),
+//                   value: false,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Text('Beauty'),
+//                   value: false,
+//                   onChanged: (bool? value) {},
+//                 ),
+//                 CheckboxListTile(
+//                   title: Text('Health'),
+//                   value: false,
+//                   onChanged: (bool? value) {},
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
+// class CircularChart extends StatelessWidget {
+//   final String title;
+//   final int percentage;
+//   final double amount;
+//   final Color color;
+//
+//   CircularChart({
+//     required this.title,
+//     required this.percentage,
+//     required this.amount,
+//     required this.color,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       alignment: Alignment.center,
+//       children: [
+//         Container(
+//           height: 150,
+//           width: 150,
+//           child: SfCircularChart(
+//             series: <CircularSeries>[
+//               DoughnutSeries<ChartData, String>(
+//                 dataSource: [
+//                   ChartData('Used', percentage, color),
+//                   ChartData('Remaining', 100 - percentage, Colors.grey[300]!),
+//                 ],
+//                 pointColorMapper: (ChartData data, _) => data.color,
+//                 xValueMapper: (ChartData data, _) => data.x,
+//                 yValueMapper: (ChartData data, _) => data.y,
+//                 innerRadius: '75%',
+//               ),
+//             ],
+//           ),
+//         ),
+//         Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Text('$percentage%', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+//             Text('\$$amount', style: TextStyle(fontSize: 16)),
+//             Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+//           ],
+//         ),
+//       ],
+//     );
+//   }
+// }
+//
+// class ChartData {
+//   ChartData(this.x, this.y, this.color);
+//   final String x;
+//   final int y;
+//   final Color color;
+// }
