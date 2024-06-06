@@ -16,3 +16,4 @@ class ResourceApp extends StatelessWidget {
     );
   }
 }
+
