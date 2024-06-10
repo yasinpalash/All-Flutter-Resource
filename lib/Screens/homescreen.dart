@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: const Text('Read'),
             ),
+
             ElevatedButton(
               onPressed: () {
                 updateFriend();
