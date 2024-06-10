@@ -12,7 +12,7 @@ class ResourceApp extends StatelessWidget {
     return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: BinderController(),
-      home: const HomeScreen(),
+      home:  HomeScreen(),
     );
   }
 }
