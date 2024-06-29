@@ -1,65 +1,169 @@
-import 'package:all_flutter_resource/Screens/tab_Item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+import '../utilits/utilits.dart';
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+class AppDrawer extends StatelessWidget {
+  const AppDrawer({Key? key}) : super(key: key);
 
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter Tab bar'),
-          centerTitle: true,
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(40),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              child: Container(
-                height: 40,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  color: Colors.green.shade100,
+    return Drawer(
+      backgroundColor: Colors.transparent,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(top: 50),
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            height: Get.height / 10 * 2,
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(topRight: Radius.circular(20))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(60)),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(60))),
+                    height: 100,
+                    width: 100,
+                    child: Image.network(
+                      "https://images.pexels.com/photos/6652928/pexels-photo-6652928.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                  (loadingProgress.expectedTotalBytes
+                                  as int)
+                                  : null,
+                            ),
+                          );
+                        }
+                      },
+                      errorBuilder: (BuildContext context, Object exception,
+                          StackTrace? stackTrace) {
+                        return const Center(child: Text('Failed to load image'));
+                      },
+                    ),
+                  ),
                 ),
-                child: const TabBar(
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  dividerColor: Colors.transparent,
-                  indicator: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.black54,
-                  tabs: [
-                    TabItem(title: 'Inbox', count: 6),
-                    TabItem(title: 'Archived', count: 3),
-                    TabItem(title: 'Deleted', count: 1),
-                  ],
-                ),
+                const SizedBox(width: 10), // Add some space between image and text
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text('Yasin Mia'), Text('yasinpolasj@gmail.com')],
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            height: Get.height / 10 * 6.75,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(bottomRight: Radius.circular(20)),
+              color: AppColors.whiteColor,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.home,
+                    text: 'হোম',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
+                  const Divider(),
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.nightlight_round,
+                    text: 'ডার্ক থিম',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
+                  const Divider(),
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.language,
+                    text: 'ইংলিশ',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
+                  const Divider(),
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.facebook,
+                    text: 'ফেইসবুক পেইজ',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
+                  const Divider(),
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.youtube_searched_for,
+                    text: 'ইউটিউব চ্যানেল',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
+                  const Divider(),
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.share,
+                    text: 'শেয়ার অ্যাপ',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
+                  const Divider(),
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.star,
+                    text: 'রিভিউ দেই',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
+                  const Divider(),
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.close,
+                    text: 'ক্লোস অ্যাপ',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
+                ],
               ),
             ),
           ),
-        ),
-        body: const TabBarView(
-          children: [
-            Center(
-              child: Text('Index'),
-            ),
-            Center(
-              child: Text('Archived'),
-            ),
-            Center(
-              child: Text('Deleted'),
-            )
-          ],
-        ),
+        ],
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(BuildContext context,
+      {required IconData icon,
+        required String text,
+        required VoidCallback onTap}) {
+    return ListTile(
+      leading: Icon(icon, color: AppColors.primaryColor),
+      title: Text(
+        text,
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+      onTap: onTap,
     );
   }
 }

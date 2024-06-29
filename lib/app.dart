@@ -1,18 +1,18 @@
-import 'package:all_flutter_resource/controller_binder/controller_binder.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'Screens/homescreen.dart';
 
-class ResourceApp extends StatelessWidget {
-  const ResourceApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialBinding: BinderController(),
-      home: const HomeScreen(),
+      home: Scaffold(
+        appBar: AppBar(title: const Text('App Drawer ')),
+        drawer:const  AppDrawer(),
+        body:const  Center(child: Text('Home Screen')),
+      ),
     );
   }
 }
