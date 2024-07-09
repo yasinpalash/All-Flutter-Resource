@@ -1,32 +1,38 @@
-import 'dart:io';
-import 'package:all_flutter_resource/Screens/homescreen.dart';
-import 'package:all_flutter_resource/modal_class/todo.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
+import 'Screens/account_list_screen.dart';
+import 'modal_class/book_model.dart';
+import 'modal_class/transaction_model.dart';
+import 'modal_class/account_model.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Directory directory=await getApplicationDocumentsDirectory();
-  Hive.init(directory.path);
-  //Register the adapter
-  Hive.registerAdapter(TodoAdapter());
-  //open a box with todos data type
-  await Hive.openBox<Todo>('todo');
+  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
 
-  await Hive.openBox('friend');
-  runApp( const MyApp());
+  Hive.registerAdapter(BookModelAdapter());
+  Hive.registerAdapter(TransactionModelAdapter());
+  Hive.registerAdapter(AccountModelAdapter());
+
+  await Hive.openBox<BookModel>('books');
+  await Hive.openBox<TransactionModel>('transactions');
+  await Hive.openBox<AccountModel>('accounts');
+
+  runApp(MyApp());
 }
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+    return MaterialApp(
+      title: 'Account Manager',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: AccountListScreen(),
     );
   }
 }
