@@ -9,7 +9,7 @@ class AccountListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Accounts'),
+        title:const  Text('Accounts'),
       ),
       body: FutureBuilder(
         future: Hive.openBox<AccountModel>('accounts'),

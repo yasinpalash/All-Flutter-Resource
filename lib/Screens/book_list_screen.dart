@@ -50,11 +50,11 @@ class BookListScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddBookScreen(accountId: account.id!),
+              builder: (context) => AddBookScreen(accountId: account.id),
             ),
           );
         },
-        child: Icon(Icons.add),
+        child:const  Icon(Icons.add),
       ),
     );
   }
