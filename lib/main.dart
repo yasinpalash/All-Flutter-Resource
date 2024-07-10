@@ -18,6 +18,7 @@ void main() async {
 
   await Hive.openBox<BookModel>('books');
   await Hive.openBox<TransactionModel>('transactions');
+
   await Hive.openBox<AccountModel>('accounts');
 
   runApp(MyApp());
