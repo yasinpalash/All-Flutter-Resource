@@ -17,6 +17,7 @@ void main() async {
   await Hive.openBox<AccountModel>('accounts');
 
 
+
   runApp(GetMaterialApp(
     title: 'Account App',
     theme: ThemeData(
