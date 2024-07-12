@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:get/get.dart';
+import '../controllers/book_controller.dart';
 import '../modal_class/book_model.dart';
 
 class AddBookScreen extends StatelessWidget {
@@ -7,11 +8,13 @@ class AddBookScreen extends StatelessWidget {
   final TextEditingController idController = TextEditingController();
   final TextEditingController categoryController = TextEditingController();
   final String accountId;
+  final BookController bookController = Get.put(BookController());
 
   AddBookScreen({required this.accountId});
 
   @override
   Widget build(BuildContext context) {
+    final BookController bookController = Get.put(BookController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Book'),
@@ -35,15 +38,14 @@ class AddBookScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () async {
-                var booksBox = Hive.box<BookModel>('books');
-                await booksBox.add(BookModel(
+              onPressed: () {
+                bookController.addBook(BookModel(
                   nameController.text,
                   idController.text,
                   categoryController.text,
-                  accountId, // Set the accountId for the book
+                  accountId,
                 ));
-                Navigator.pop(context);
+                Get.back();
               },
               child: Text('Save'),
             ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:get/get.dart';
+import '../controllers/transaction_controller.dart';
 import '../modal_class/transaction_model.dart';
 
 class AddTransactionScreen extends StatelessWidget {
   final TextEditingController typeController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
   final String bookId;
+  final TransactionController transactionController = Get.find();
 
   AddTransactionScreen({required this.bookId});
 
@@ -31,15 +33,14 @@ class AddTransactionScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () async {
-                var transactionsBox = Hive.box<TransactionModel>('transactions');
-                await transactionsBox.add(TransactionModel(
+              onPressed: () {
+                transactionController.addTransaction(TransactionModel(
                   bookId,
                   typeController.text,
                   double.parse(amountController.text),
                   DateTime.now(),
                 ));
-                Navigator.pop(context);
+                Get.back();
               },
               child: Text('Save'),
             ),

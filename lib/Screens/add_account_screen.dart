@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:get/get.dart';
 import '../modal_class/account_model.dart';
+import '../controllers/account_controller.dart';
+import 'home_screen.dart';
 
 class AddAccountScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController idController = TextEditingController();
+  final AccountController accountController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +30,12 @@ class AddAccountScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () async {
-                var accountsBox = Hive.box<AccountModel>('accounts');
-                await accountsBox.add(AccountModel(
+              onPressed: () {
+                accountController.addAccount(AccountModel(
                   nameController.text,
                   idController.text,
                 ));
-                Navigator.pop(context);
+                Get.offAll(MainScreen()); // Navigate to main screen and remove all previous routes
               },
               child: Text('Save'),
             ),

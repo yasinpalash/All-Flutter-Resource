@@ -1,60 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:get/get.dart';
 import '../modal_class/book_model.dart';
 import 'add_book_screen.dart';
 import 'book_detail_screen.dart';
 import '../modal_class/account_model.dart';
+import '../controllers/book_controller.dart';
 
 class BookListScreen extends StatelessWidget {
-  final AccountModel account;
+  final AccountModel? account;
+  final BookController bookController = Get.put(BookController());
 
-  BookListScreen({required this.account});
+  BookListScreen({ this.account});
 
   @override
   Widget build(BuildContext context) {
+    bookController.fetchBooks(account!.id);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('${account.name}\'s Books'),
+        title: Text('${account?.name}\'s Books'),
       ),
-      body: FutureBuilder(
-        future: Hive.openBox<BookModel>('books'),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            var booksBox = Hive.box<BookModel>('books');
-            var accountBooks = booksBox.values.where((book) => book.accountId == account.id).toList();
-            return ListView.builder(
-              itemCount: accountBooks.length,
-              itemBuilder: (context, index) {
-                BookModel book = accountBooks[index];
-                return ListTile(
-                  title: Text(book.name ?? 'No Name'),
-                  subtitle: Text(book.category ?? 'No Category'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookDetailScreen(book),
-                      ),
-                    );
-                  },
-                );
-              },
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
+      body: Obx(() {
+        if (bookController.books.isEmpty) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return ListView.builder(
+            itemCount: bookController.books.length,
+            itemBuilder: (context, index) {
+              BookModel book = bookController.books[index];
+              return ListTile(
+                title: Text(book.name!),
+                subtitle: Text(book.category!),
+                onTap: () {
+                  Get.to(() => BookDetailScreen(book: book));
+                },
+              );
+            },
+          );
+        }
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddBookScreen(accountId: account.id),
-            ),
-          );
+          Get.to(() => AddBookScreen(accountId: account!.id));
         },
-        child:const  Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
     );
   }

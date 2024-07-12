@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/transaction_controller.dart';
-import '../modal_class/book_model.dart';
 import '../modal_class/transaction_model.dart';
-import 'add_transaction_screen.dart';
+import '../controllers/transaction_controller.dart';
 
-class BookDetailScreen extends StatelessWidget {
-  final BookModel book;
-  final TransactionController transactionController = Get.find();
-
-  BookDetailScreen({required this.book});
+class TransactionListScreen extends StatelessWidget {
+  final TransactionController transactionController = Get.put(TransactionController());
 
   @override
   Widget build(BuildContext context) {
-    transactionController.fetchTransactions(book.id!);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(book.name!),
+        title: Text('Transactions'),
       ),
       body: Obx(() {
         if (transactionController.transactions.isEmpty) {
@@ -35,12 +28,6 @@ class BookDetailScreen extends StatelessWidget {
           );
         }
       }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(() => AddTransactionScreen(bookId: book.id!));
-        },
-        child: Icon(Icons.add),
-      ),
     );
   }
 }
