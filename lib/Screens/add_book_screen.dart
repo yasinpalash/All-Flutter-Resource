@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/book_controller.dart';
 import '../modal_class/book_model.dart';
+import '../controllers/book_controller.dart';
 
 class AddBookScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController idController = TextEditingController();
   final TextEditingController categoryController = TextEditingController();
   final String accountId;
-  final BookController bookController = Get.put(BookController());
+  final BookController bookController = Get.find();
 
   AddBookScreen({required this.accountId});
 
   @override
   Widget build(BuildContext context) {
-    final BookController bookController = Get.put(BookController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Book'),

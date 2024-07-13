@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/transaction_controller.dart';
 import '../modal_class/book_model.dart';
 import '../modal_class/transaction_model.dart';
 import 'add_transaction_screen.dart';
+import '../controllers/transaction_controller.dart';
 
 class BookDetailScreen extends StatelessWidget {
   final BookModel book;

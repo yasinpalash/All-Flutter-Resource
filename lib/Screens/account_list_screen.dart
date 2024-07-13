@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../modal_class/account_model.dart';
 import 'book_list_screen.dart';
+import 'add_account_screen.dart';
 import '../controllers/account_controller.dart';
 
 class AccountListScreen extends StatelessWidget {
-  final AccountController accountController = Get.find();
+  final AccountController accountController = Get.put(AccountController());
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,12 @@ class AccountListScreen extends StatelessWidget {
           );
         }
       }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => AddAccountScreen());
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

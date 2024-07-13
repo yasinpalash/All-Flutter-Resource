@@ -7,18 +7,18 @@ import '../modal_class/account_model.dart';
 import '../controllers/book_controller.dart';
 
 class BookListScreen extends StatelessWidget {
-  final AccountModel? account;
-  final BookController bookController = Get.put(BookController());
+  final AccountModel account;
+  final BookController bookController = Get.find();
 
-  BookListScreen({ this.account});
+  BookListScreen({required this.account});
 
   @override
   Widget build(BuildContext context) {
-    bookController.fetchBooks(account!.id);
+    bookController.fetchBooks(account.id);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${account?.name}\'s Books'),
+        title: Text('${account.name}\'s Books'),
       ),
       body: Obx(() {
         if (bookController.books.isEmpty) {
@@ -41,7 +41,7 @@ class BookListScreen extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => AddBookScreen(accountId: account!.id));
+          Get.to(() => AddBookScreen(accountId: account.id));
         },
         child: Icon(Icons.add),
       ),

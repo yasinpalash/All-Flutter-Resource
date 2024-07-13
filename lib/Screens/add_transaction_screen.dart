@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/transaction_controller.dart';
 import '../modal_class/transaction_model.dart';
+import '../controllers/transaction_controller.dart';
 
 class AddTransactionScreen extends StatelessWidget {
   final TextEditingController typeController = TextEditingController();

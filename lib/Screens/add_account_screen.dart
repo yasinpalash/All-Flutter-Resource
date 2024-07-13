@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../modal_class/account_model.dart';
 import '../controllers/account_controller.dart';
-import 'home_screen.dart';
 
 class AddAccountScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
@@ -35,7 +34,7 @@ class AddAccountScreen extends StatelessWidget {
                   nameController.text,
                   idController.text,
                 ));
-                Get.offAll(MainScreen()); // Navigate to main screen and remove all previous routes
+                Get.back();
               },
               child: Text('Save'),
             ),
