@@ -14,7 +14,7 @@ class BookModel extends HiveObject {
   String? category;
 
   @HiveField(3)
-  String? accountId;  // Allow accountId to be null
+  String? accountId;
 
   BookModel(this.name, this.id, this.category, this.accountId);
 }

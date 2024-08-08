@@ -12,11 +12,11 @@ class AccountListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Accounts'),
+        title: const Text('Accounts'),
       ),
       body: Obx(() {
         if (accountController.accounts.isEmpty) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else {
           return ListView.builder(
             itemCount: accountController.accounts.length,
